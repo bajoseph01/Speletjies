@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="af">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Afrikaans Taalwerk Speletjies (Gr 5)</title>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', 'Chalkboard SE', 'Arial', sans-serif;
+            background-color: #f0f8ff; /* AliceBlue */
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .dashboard-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #ff6347; /* Tomato */
+            text-shadow: 1px 1px #ffd700; /* Gold */
+        }
+
+        .game-section {
+            background-color: #fff8dc; /* Cornsilk */
+            border: 2px solid #ffdab9; /* PeachPuff */
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 25px;
+        }
+
+        .game-section h2 {
+            color: #4682b4; /* SteelBlue */
+            border-bottom: 2px dashed #add8e6; /* LightBlue */
+            padding-bottom: 5px;
+            margin-top: 0;
+        }
+
+        .question-item {
+            margin-bottom: 20px;
+            padding: 10px;
+            background-color: #fafad2; /* LightGoldenrodYellow */
+            border-radius: 5px;
+        }
+        
+        .question-item p {
+            margin-bottom: 8px;
+        }
+
+        input[type="text"] {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin: 0 5px;
+            min-width: 100px;
+            transition: border-color 0.3s;
+        }
+        
+        input[type="text"].long-input {
+            width: 80%;
+        }
+
+        input[type="text"]:focus {
+            border-color: #4682b4;
+            outline: none;
+        }
+
+        button {
+            background-color: #32cd32; /* LimeGreen */
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s, transform 0.1s;
+            margin-top: 5px;
+        }
+
+        button:hover {
+            background-color: #228b22; /* ForestGreen */
+            transform: translateY(-2px);
+        }
+        
+        button:active {
+            transform: translateY(0);
+        }
+
+        .feedback {
+            margin-top: 5px;
+            font-weight: bold;
+            padding: 5px;
+            border-radius: 3px;
+        }
+
+        .feedback.correct {
+            color: #228b22; /* ForestGreen */
+            background-color: #e0ffe0; /* Honeydew */
+        }
+
+        .feedback.incorrect {
+            color: #dc143c; /* Crimson */
+            background-color: #ffe0e0; /* MistyRose */
+        }
+        
+        .original-sentence {
+            font-style: italic;
+            color: #555;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <h1>Afrikaans Taalwerk Speletjies!</h1>
+
+        <!-- B. VERKLEINWOORDE -->
+        <div class="game-section" id="verkleinwoorde">
+            <h2>B. Verkleinwoorde</h2>
+            <p>Skryf die verkleinwoorde van die woorde tussen hakies neer.</p>
+
+            <div class="question-item">
+                <p>Die baba speel met die klein <input type="text" id="vk-motor" data-answer="motortjie"> (motor)
+                   en 'n lekker <input type="text" id="vk-spel" data-answer="speletjie"> (spel)
+                   met die <input type="text" id="vk-bal" data-answer="balletjie"> (bal)
+                   onder die <input type="text" id="vk-boom" data-answer="boompie"> (boom).</p>
+                <button onclick="checkVerkleinwoordeGroup1()">Kontroleer Deel 1</button>
+                <div id="vk-group1-feedback" class="feedback"></div>
+            </div>
+            <div class="question-item">
+                <p>Hy het sy klein <input type="text" id="vk-swembroek" data-answer="swembroekie"> (swembroek)
+                   aan en wil in die <input type="text" id="vk-dam" data-answer="dammetjie"> (dam) gaan swem.</p>
+                <button onclick="checkVerkleinwoordeGroup2()">Kontroleer Deel 2</button>
+                <div id="vk-group2-feedback" class="feedback"></div>
+            </div>
+            <div class="question-item">
+                <p>Sy ma sit sy klein <input type="text" id="vk-hoed" data-answer="hoedjie"> (hoed)
+                   op sy <input type="text" id="vk-kop" data-answer="koppie"> (kop)
+                   en smeer sonskerm op sy <input type="text" id="vk-arm" data-answer="armpie"> (arm).
+                   Sy trek sy <input type="text" id="vk-kous" data-answer="kousie"> (kous) uit.</p>
+                <button onclick="checkVerkleinwoordeGroup3()">Kontroleer Deel 3</button>
+                <div id="vk-group3-feedback" class="feedback"></div>
+            </div>
+            <div class="question-item">
+                <p>Vou die skoon <input type="text" id="vk-hemp" data-answer="hempie"> (hemp)
+                   en loop op die smal <input type="text" id="vk-pad" data-answer="paadjie"> (pad).</p>
+                <button onclick="checkVerkleinwoordeGroup4()">Kontroleer Deel 4</button>
+                <div id="vk-group4-feedback" class="feedback"></div>
+            </div>
+        </div>
+
+        <!-- C. MEERVOUDE -->
+        <div class="game-section" id="meervoude">
+            <h2>C. Meervoude</h2>
+            <p>Tik die korrekte meervoude.</p>
+            
+            <div class="question-item">
+                <p>Woorde: (hond, kat)</p>
+                <p>Meervoude: <input type="text" id="mv-hond" placeholder="hond meervoud" data-answer="honde">, 
+                             <input type="text" id="mv-kat" placeholder="kat meervoud" data-answer="katte"></p>
+                <button onclick="checkMeervoude('hond', 'kat')">Kontroleer</button>
+                <div id="mv-hond-feedback" class="feedback"></div>
+            </div>
+
+            <div class="question-item">
+                <p>Woorde: (kind, boek, onderwyser)</p>
+                <p>Meervoude: <input type="text" id="mv-kind" placeholder="kind meervoud" data-answer="kinders">, 
+                             <input type="text" id="mv-boek" placeholder="boek meervoud" data-answer="boeke">,
+                             <input type="text" id="mv-onderwyser" placeholder="onderwyser meervoud" data-answer="onderwysers"></p>
+                <button onclick="checkMeervoude('kind', 'boek', 'onderwyser')">Kontroleer</button>
+                <div id="mv-kind-feedback" class="feedback"></div>
+            </div>
+            
+            <div class="question-item">
+                <p>Woorde: (appel, piesang, vlieg)</p>
+                <p>Meervoude: <input type="text" id="mv-appel" placeholder="appel meervoud" data-answer="appels">, 
+                             <input type="text" id="mv-piesang" placeholder="piesang meervoud" data-answer="piesangs">,
+                             <input type="text" id="mv-vlieg" placeholder="vlieg meervoud" data-answer="vlieë"></p>
+                <button onclick="checkMeervoude('appel', 'piesang', 'vlieg')">Kontroleer</button>
+                <div id="mv-appel-feedback" class="feedback"></div>
+            </div>
+
+            <div class="question-item">
+                <p>Woorde: (vinger, arm)</p>
+                <p>Meervoude: <input type="text" id="mv-vinger" placeholder="vinger meervoud" data-answer="vingers">, 
+                             <input type="text" id="mv-arm" placeholder="arm meervoud" data-answer="arms"></p>
+                <button onclick="checkMeervoude('vinger', 'arm')">Kontroleer</button>
+                <div id="mv-vinger-feedback" class="feedback"></div>
+            </div>
+
+            <div class="question-item">
+                <p>Woorde: (hemp, pad)</p>
+                <p>Meervoude: <input type="text" id="mv-hemp" placeholder="hemp meervoud" data-answer="hemde">, 
+                             <input type="text" id="mv-pad" placeholder="pad meervoud" data-answer="paaie"></p>
+                <button onclick="checkMeervoude('hemp', 'pad')">Kontroleer</button>
+                <div id="mv-hemp-feedback" class="feedback"></div>
+            </div>
+        </div>
+
+        <!-- D. VOEGWOORDE -->
+        <div class="game-section" id="voegwoorde">
+            <h2>D. Voegwoorde</h2>
+            <p>Verbind die sinne deur die voegwoord tussen hakies te gebruik.</p>
+
+            <div class="question-item">
+                <p class="original-sentence">1. Mevrou Bakkes bak 'n pizza. Haar man eet dit op. (en)</p>
+                <input type="text" id="vw1" class="long-input" data-answer="Mevrou Bakkes bak 'n pizza en haar man eet dit op.">
+                <button onclick="checkVoegwoord('vw1')">Kontroleer</button>
+                <div id="vw1-feedback" class="feedback"></div>
+            </div>
+            <div class="question-item">
+                <p class="original-sentence">2. Sy pak die kos in die trollie. Dit is te klein. (maar)</p>
+                <input type="text" id="vw2" class="long-input" data-answer="Sy pak die kos in die trollie, maar dit is te klein.">
+                <button onclick="checkVoegwoord('vw2')">Kontroleer</button>
+                <div id="vw2-feedback" class="feedback"></div>
+            </div>
+            <div class="question-item">
+                <p class="original-sentence">3. Die pizza is groot. Sy het 'n groot pan nodig. (daarom)</p>
+                <input type="text" id="vw3" class="long-input" data-answer="Die pizza is groot, daarom het sy 'n groot pan nodig.">
+                <button onclick="checkVoegwoord('vw3')">Kontroleer</button>
+                <div id="vw3-feedback" class="feedback"></div>
+            </div>
+             <div class="question-item">
+                <p class="original-sentence">4. Meneer Bakkes eet lekker. Die pizza is heerlik. (want)</p>
+                <input type="text" id="vw4" class="long-input" data-answer="Meneer Bakkes eet lekker, want die pizza is heerlik.">
+                <button onclick="checkVoegwoord('vw4')">Kontroleer</button>
+                <div id="vw4-feedback" class="feedback"></div>
+            </div>
+            <div class="question-item">
+                <p class="original-sentence">5. Mevrou Bakkes gaan 'n groot pizza maak. Sy koop baie. (dus)</p>
+                <input type="text" id="vw5" class="long-input" data-answer="Mevrou Bakkes gaan 'n groot pizza maak, dus koop sy baie.">
+                <button onclick="checkVoegwoord('vw5')">Kontroleer</button>
+                <div id="vw5-feedback" class="feedback"></div>
+            </div>
+            <div class="question-item">
+                <p class="original-sentence">6. Liefie meng die deeg. Sy sit dit in die oond. (daarna)</p>
+                <input type="text" id="vw6" class="long-input" data-answer="Liefie meng die deeg, daarna sit sy dit in die oond.">
+                <button onclick="checkVoegwoord('vw6')">Kontroleer</button>
+                <div id="vw6-feedback" class="feedback"></div>
+            </div>
+            <div class="question-item">
+                <p class="original-sentence">7. Mevrou Bakkes is bly. Hy het die pizza geëet. (want)</p>
+                <input type="text" id="vw7" class="long-input" data-answer="Mevrou Bakkes is bly, want hy het die pizza geëet.">
+                <button onclick="checkVoegwoord('vw7')">Kontroleer</button>
+                <div id="vw7-feedback" class="feedback"></div>
+            </div>
+        </div>
+
+        <!-- F. TYD - Verlede Tyd -->
+        <div class="game-section" id="verlede-tyd">
+            <h2>F. Tyd - Verlede Tyd</h2>
+            <p>Skryf die sinne in die verlede tyd.</p>
+
+            <div class="question-item">
+                <p class="original-sentence">1. Sarah sal Saterdag op haar perd ry.</p>
+                <input type="text" id="vt1" class="long-input" data-answer="Sarah het Saterdag op haar perd gery.">
+                <button onclick="checkTyd('vt1')">Kontroleer</button>
+                <div id="vt1-feedback" class="feedback"></div>
+            </div>
+            <div class="question-item">
+                <p class="original-sentence">2. Mila lees 'n boek.</p>
+                <input type="text" id="vt2" class="long-input" data-answer="Mila het 'n boek gelees.">
+                <button onclick="checkTyd('vt2')">Kontroleer</button>
+                <div id="vt2-feedback" class="feedback"></div>
+            </div>
+            <div class="question-item">
+                <p class="original-sentence">3. Jock jaag 'n bok.</p>
+                <input type="text" id="vt3" class="long-input" data-answer="Jock het 'n bok gejaag.">
+                <button onclick="checkTyd('vt3')">Kontroleer</button>
+                <div id="vt3-feedback" class="feedback"></div>
+            </div>
+        </div>
+
+        <!-- G. TYD - Toekomende Tyd -->
+        <div class="game-section" id="toekomende-tyd">
+            <h2>G. Tyd - Toekomende Tyd</h2>
+            <p>Skryf die sinne in die toekomende tyd.</p>
+
+            <div class="question-item">
+                <p class="original-sentence">1. Gouelokkies het die stoeltjie gebreek.</p>
+                <input type="text" id="tt1" class="long-input" data-answer="Gouelokkies sal die stoeltjie breek.">
+                <button onclick="checkTyd('tt1')">Kontroleer</button>
+                <div id="tt1-feedback" class="feedback"></div>
+            </div>
+            <div class="question-item">
+                <p class="original-sentence">2. Gugu speel met sy baba boetie.</p>
+                <input type="text" id="tt2" class="long-input" data-answer="Gugu sal met sy baba boetie speel.">
+                <button onclick="checkTyd('tt2')">Kontroleer</button>
+                <div id="tt2-feedback" class="feedback"></div>
+            </div>
+            <div class="question-item">
+                <p class="original-sentence">3. Sammy-Skye lees 'n mooi storie.</p>
+                <input type="text" id="tt3" class="long-input" data-answer="Sammy-Skye sal 'n mooi storie lees.">
+                <button onclick="checkTyd('tt3')">Kontroleer</button>
+                <div id="tt3-feedback" class="feedback"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function normalizeAnswer(answer) {
+            if (typeof answer !== 'string') return '';
+            // Remove trailing full stop, convert to lowercase, and trim whitespace
+            return answer.replace(/\.$/, '').toLowerCase().trim();
+        }
+
+        function displayFeedback(feedbackEl, message, isCorrect) {
+            feedbackEl.textContent = message;
+            feedbackEl.className = 'feedback'; // Reset classes
+            if (isCorrect === true) {
+                feedbackEl.classList.add('correct');
+            } else if (isCorrect === false) {
+                feedbackEl.classList.add('incorrect');
+            }
+        }
+        
+        // VERKLEINWOORDE
+        function checkVerkleinwoordeGroup(ids, feedbackId) {
+            const feedbackEl = document.getElementById(feedbackId);
+            let allCorrect = true;
+            let feedbackMessages = [];
+
+            ids.forEach(id => {
+                const inputEl = document.getElementById(id);
+                const userAnswer = normalizeAnswer(inputEl.value);
+                const correctAnswer = normalizeAnswer(inputEl.dataset.answer);
+                // Extract original word from data-answer by removing common diminutive endings.
+                // This is a heuristic and might need refinement for more complex rules.
+                let originalWord = inputEl.dataset.answer.replace(/tjie$/, '').replace(/jie$/, '').replace(/pie$/, '').replace(/ie$/, '');
+                if (inputEl.id === "vk-dam") originalWord = "dam"; // Special case due to 'dammetjie'
+
+                if (userAnswer === correctAnswer) {
+                    inputEl.style.borderColor = 'green';
+                    feedbackMessages.push(`"${inputEl.dataset.answer}" is reg!`);
+                } else {
+                    inputEl.style.borderColor = 'red';
+                    allCorrect = false;
+                    feedbackMessages.push(`Vir (${originalWord}) probeer weer. Regte antwoord: ${inputEl.dataset.answer}`);
+                }
+            });
+
+            if(allCorrect) {
+                displayFeedback(feedbackEl, "Baie mooi! Alles is reg in hierdie groep!", true);
+            } else {
+                displayFeedback(feedbackEl, "Party is nog nie heeltemal reg nie. Kyk na die rooi blokkies. " + feedbackMessages.join(' '), false);
+            }
+        }
+
+        function checkVerkleinwoordeGroup1() {
+            checkVerkleinwoordeGroup(['vk-motor', 'vk-spel', 'vk-bal', 'vk-boom'], 'vk-group1-feedback');
+        }
+        function checkVerkleinwoordeGroup2() {
+            checkVerkleinwoordeGroup(['vk-swembroek', 'vk-dam'], 'vk-group2-feedback');
+        }
+        function checkVerkleinwoordeGroup3() {
+            checkVerkleinwoordeGroup(['vk-hoed', 'vk-kop', 'vk-arm', 'vk-kous'], 'vk-group3-feedback');
+        }
+        function checkVerkleinwoordeGroup4() {
+            checkVerkleinwoordeGroup(['vk-hemp', 'vk-pad'], 'vk-group4-feedback');
+        }
+
+
+        // MEERVOUDE
+        function checkMeervoude(...wordBases) { // wordBases are like 'hond', 'kat' etc.
+            const feedbackBaseId = wordBases[0]; // e.g., 'mv-hond' -> use 'mv-hond-feedback'
+            const feedbackEl = document.getElementById('mv-' + feedbackBaseId + '-feedback'); // e.g. mv-hond-feedback
+            
+            let allPluralsCorrect = true;
+            let pluralFeedbackMessages = [];
+
+            for (let i = 0; i < wordBases.length; i++) {
+                const baseName = wordBases[i];
+                const inputEl = document.getElementById('mv-' + baseName); // e.g., mv-hond
+                const userAnswer = normalizeAnswer(inputEl.value);
+                const correctAnswer = normalizeAnswer(inputEl.dataset.answer);
+
+                if (userAnswer === correctAnswer) {
+                    inputEl.style.borderColor = 'green';
+                    pluralFeedbackMessages.push(` ${correctAnswer} (reg)`);
+                } else {
+                    inputEl.style.borderColor = 'red';
+                    allPluralsCorrect = false;
+                    pluralFeedbackMessages.push(` (${baseName} was ${inputEl.dataset.answer})`);
+                }
+            }
+            
+            if (allPluralsCorrect) {
+                displayFeedback(feedbackEl, "Mooi! Jou meervoude is reg: " + pluralFeedbackMessages.join(''), true);
+            } else {
+                displayFeedback(feedbackEl, "Kyk weer na jou meervoude. " + pluralFeedbackMessages.join(''), false);
+            }
+        }
+
+        // VOEGWOORDE & TYD (similar logic)
+        function checkGenericSentence(inputId, feedbackId) {
+            const inputEl = document.getElementById(inputId);
+            const feedbackEl = document.getElementById(feedbackId);
+            const userAnswer = normalizeAnswer(inputEl.value);
+            const correctAnswer = normalizeAnswer(inputEl.dataset.answer);
+
+            // Allow for answers without a comma if the only difference is a comma
+            const correctAnswerNoComma = correctAnswer.replace(/,/g, '');
+            const userAnswerNoComma = userAnswer.replace(/,/g, '');
+
+            if (userAnswer === correctAnswer || userAnswerNoComma === correctAnswerNoComma) {
+                displayFeedback(feedbackEl, "Reg! Baie mooi!", true);
+                inputEl.style.borderColor = 'green';
+            } else {
+                displayFeedback(feedbackEl, `Amper! Probeer weer. Die korrekte antwoord is: "${inputEl.dataset.answer}"`, false);
+                inputEl.style.borderColor = 'red';
+            }
+        }
+        
+        function checkVoegwoord(inputId) {
+            checkGenericSentence(inputId, inputId + '-feedback');
+        }
+
+        function checkTyd(inputId) {
+            checkGenericSentence(inputId, inputId + '-feedback');
+        }
+
+    </script>
+</body>
+</html>
